@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Typewriter Effect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inconsolata:wght@800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: url("https://e1.pxfuel.com/desktop-wallpaper/1003/734/desktop-wallpaper-anonymous-backgrounds-anonymous-background.jpg"); /* Replace with your background image path */
+        background-size: cover;
+        color: #fff;
+        overflow: hidden;
+      }
+
+      #typewriter-container {
+        text-align: center;
+        position: absolute;
+        top: 100px;
+        transform: translateY(-50%);
+      }
+
+      #typewriter-text {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        font-size: 44px;
+        font-family: "Inconsolata";
+        border-right: 2px solid #21b043;
+        color: green;
+        animation: typing 4s steps(24) forwards;
+      }
+
+      @keyframes typing {
+        from {
+          width: 0;
+        }
+        to {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="typewriter-container">
+      <div id="typewriter-text"></div>
+    </div>
+
+    <script>
+      // You can customize the text and typing speed here
+      const text =
+        "⚠️ WARNING: System Alert! ⚠️ <br> Attention user, heed this cautionary transmission! 🚨<br> Never engage with emails without verifing the source header";
+      const speed = 50; // in milliseconds
+
+      function typeWriter() {
+        let i = 0;
+        const typewriterText = document.getElementById("typewriter-text");
+        const intervalId = setInterval(function () {
+          if (i < text.length) {
+            const char = text.charAt(i);
+            if (char === "<") {
+              let tag = "";
+              while (text.charAt(i) !== ">") {
+                tag += text.charAt(i);
+                i++;
+              }
+              tag += ">";
+              typewriterText.innerHTML += tag;
+            } else {
+              typewriterText.innerHTML += char;
+            }
+            i++;
+          } else {
+            clearInterval(intervalId); // Stop the interval when the text is fully typed
+          }
+        }, speed);
+      }
+
+      // Start the typewriter effect when the window loads
+      window.onload = typeWriter;
+    </script>
+  </body>
+</html>
